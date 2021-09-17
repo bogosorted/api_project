@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authenticate_user, only: [:show,:update,:destroy]
+
+  
 
   # GET /users
   def index
@@ -44,9 +47,21 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+
+    def authenticate_user()
+    
+      token = request.headers["HTTP_AUTHORIZATION"]
+
+      if token.empty?
+      head :forbidden
+      elsif !JsonWebTokens.decode(token,JWT_KEY)
+      head :forbidden
+      end
+      
+    end
+
     # Only allow a list of trusted parameters through.
     def user_params
-      
       params.require(:user).permit(:nick_name,:password, :email, :cpf)
     end
 end

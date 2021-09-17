@@ -18,7 +18,7 @@ class JsonWebTokens
             HashWithIndifferentAccess.new body
 
         rescue
-           # "your token is not valid"
+
         end
         
     end

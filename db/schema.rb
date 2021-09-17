@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_131003) do
+ActiveRecord::Schema.define(version: 2021_09_16_213824) do
 
   create_table "users", force: :cascade do |t|
     t.string "nick_name"
     t.string "password_digest"
     t.string "email"
     t.string "cpf"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "visits", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "status"
+    t.integer "user_id"
+    t.datetime "checkin_at"
+    t.datetime "checkout_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

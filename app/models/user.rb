@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+    has_many :visits
     #Email
     validates :email,
                 presence: true,
