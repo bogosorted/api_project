@@ -51,13 +51,17 @@ class UsersController < ApplicationController
     def authenticate_user()
     
       token = request.headers["HTTP_AUTHORIZATION"]
-
-      if token.empty?
-      head :forbidden
-      elsif !JsonWebTokens.decode(token,JWT_KEY)
-      head :forbidden
-      end
       
+      begin
+
+        JsonWebTokens.decode(token,JWT_KEY)
+
+      rescue JWT::DecodeError => e
+
+        render json: { errors: e.message }, status: :unauthorized
+
+      end
+
     end
 
     # Only allow a list of trusted parameters through.

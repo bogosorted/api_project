@@ -17,8 +17,6 @@ class JsonWebTokens
             body = JWT.decode(token,key)[0] 
             HashWithIndifferentAccess.new body
 
-        rescue
-
         end
         
     end
