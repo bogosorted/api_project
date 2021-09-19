@@ -1,5 +1,6 @@
 class VisitsController < ApplicationController
   before_action :set_visit, only: [:show, :update, :destroy]
+  before_action :authenticate_user, only: [:index,:create,:update,:destroy]
 
   # GET /visits
   def index
@@ -14,13 +15,32 @@ class VisitsController < ApplicationController
 
   # POST /visits
   def create
-    @visit = Visit.new(visit_params)
+
+    begin
+
+      @visit = Visit.new(visit_params)
+
+    rescue StandardError => e
+
+      render json: {errors: e.message}, status: 404
+      return;
+
+    end
+
+    @visit.user = @user
+
+    if @visit.date.to_time >= Time.now.to_time
+
 
     if @visit.save
+
       render json: @visit, status: :created, location: @visit
     else
+
       render json: @visit.errors, status: :unprocessable_entity
+
     end
+    
   end
 
   # PATCH/PUT /visits/1

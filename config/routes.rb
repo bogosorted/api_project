@@ -1,8 +1,25 @@
 Rails.application.routes.draw do
-  resources :visits 
-  resources :users, only: [:index,:show,:update,:destroy]
 
+  resources :answers
+  resources :questions
+  resources :formularies  
+
+
+  
+  #user authentication
   post '/sign_up', to: 'users#create'
-  post '/login', to: 'session#login'
+  post '/login', to: 'users#login'
+
+  #when user logged
+  scope 'users' do
+
+    get '/profile', to: 'users#show'
+    delete '/delete_account' , to: 'users#destroy'
+    patch '/edit_account' , to: 'users#update'
+
+    resources :visits
+
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

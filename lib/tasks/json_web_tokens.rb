@@ -4,6 +4,8 @@ class JsonWebTokens
     class << self
 
         def encode(user_id,user_email,key, exp = 24.hours.from_now)
+
+            #cannot have sensitive info
             payload = {}
             payload[:sub] = user_id
             payload[:email] = user_email
@@ -14,8 +16,8 @@ class JsonWebTokens
    
         def decode(token,key)
 
-            body = JWT.decode(token,key)[0] 
-            HashWithIndifferentAccess.new body
+            payload = JWT.decode(token,key)[0] 
+            HashWithIndifferentAccess.new payload
 
         end
         

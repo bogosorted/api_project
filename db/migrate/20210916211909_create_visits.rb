@@ -3,7 +3,7 @@ class CreateVisits < ActiveRecord::Migration[6.1]
     create_table :visits do |t|
       t.datetime :date
       t.integer :status
-      t.references :user_id, index: false
+      t.references :user, null: false, foreign_key: true
       t.datetime :checkin_at
       t.datetime :checkout_at
 
