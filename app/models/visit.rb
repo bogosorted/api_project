@@ -1,10 +1,12 @@
 class Visit < ApplicationRecord
 
     belongs_to :user
-
-    enum status:[:pending,:doing,:done]   
     
     validates :date, presence: true
+    enum status:[:pending,:doing,:done]   
+
+
+    validates_with StatusAndDateValidator
 
 
 end

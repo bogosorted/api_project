@@ -2,7 +2,7 @@ require './app/services/user_authentication'
 
 class ApplicationController < ActionController::API
     
-    Time.zone = 'America/Sao_Paulo'
+
     JWT_KEY = Rails.application.credentials.jwt_secret
 
 

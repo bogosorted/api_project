@@ -1,6 +1,7 @@
 class VisitsController < ApplicationController
+
+  before_action :authenticate_user, only: [:show,:index,:create,:update,:destroy,:set_visit]
   before_action :set_visit, only: [:show, :update, :destroy]
-  before_action :authenticate_user, only: [:index,:create,:update,:destroy]
 
   # GET /visits
   def index
@@ -16,23 +17,9 @@ class VisitsController < ApplicationController
   # POST /visits
   def create
 
-    begin
-
-      @visit = Visit.new(visit_params)
-
-    rescue StandardError => e
-      
-      render json: {errors: e.message}, status: 404
-      return;
-
-    end
-
+    @visit = Visit.new(visit_params)
     @visit.user = @user
-
-    if @visit.date.to_time <= Time.now.to_time
-      render json:
-
-
+    
     if @visit.save
 
       render json: @visit, status: :created, location: @visit
@@ -46,13 +33,19 @@ class VisitsController < ApplicationController
 
   # PATCH/PUT /visits/1
   def update
-    if @visit.update(visit_params)
-      render json: @visit
-    else
-      render json: @visit.errors, status: :unprocessable_entity
-    end
+   
+      if @visit.update(visit_params)
+        render json: @visit
+      else
+        render json: @visit.errors, status: :unprocessable_entity
+      end
   end
+  
+  def set_visit
+    
+    @visit = @user.visits[params[:id].to_i]
 
+  end
   # DELETE /visits/1
   def destroy
     @visit.destroy
@@ -60,12 +53,9 @@ class VisitsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_visit
-      @visit = Visit.find(params[:id])
-    end
 
     # Only allow a list of trusted parameters through.
     def visit_params
-      params.require(:visit).permit(:date, :status, :user_id, :checkin_at, :checkout_at)
+      params.require(:visit).permit(:date, :checkin_at, :checkout_at)
     end
 end
