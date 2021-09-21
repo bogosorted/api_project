@@ -21,7 +21,7 @@ class VisitsController < ApplicationController
       @visit = Visit.new(visit_params)
 
     rescue StandardError => e
-
+      
       render json: {errors: e.message}, status: 404
       return;
 
@@ -29,7 +29,8 @@ class VisitsController < ApplicationController
 
     @visit.user = @user
 
-    if @visit.date.to_time >= Time.now.to_time
+    if @visit.date.to_time <= Time.now.to_time
+      render json:
 
 
     if @visit.save

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+    #softdelet
+    acts_as_paranoid
+
     has_many :visits
     #Email
     validates :email,

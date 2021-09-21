@@ -16,6 +16,8 @@ gem 'jwt'
 gem 'bcrypt', '~>3.1.7'
 # Use cpf_cnpj as cpf validator
 gem "cpf_cnpj", '~>0.5.0'
+# Use paranoia as a soft delet algorithm
+gem 'paranoia', '~> 2.1', '>= 2.1.5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
