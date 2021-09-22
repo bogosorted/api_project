@@ -5,11 +5,13 @@ class VisitsController < ApplicationController
 
   # GET /visits
   def index
-    @visits = Visit.all
+    
+    @visits = @user.visits
+
     render json: @visits
   end
 
-  # GET /visits/1
+  # GET /visits/0
   def show
     render json: @visit
   end
@@ -31,7 +33,7 @@ class VisitsController < ApplicationController
     
   end
 
-  # PATCH/PUT /visits/1
+  # PATCH/PUT /visits/0
   def update
    
       if @visit.update(visit_params)
@@ -46,7 +48,7 @@ class VisitsController < ApplicationController
     @visit = @user.visits[params[:id].to_i]
 
   end
-  # DELETE /visits/1
+  # DELETE /visits/0
   def destroy
     @visit.destroy
   end
