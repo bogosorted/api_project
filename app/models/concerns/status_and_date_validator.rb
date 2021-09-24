@@ -4,14 +4,11 @@ class StatusAndDateValidator < ActiveModel::Validator
 
     def validate(record)
 
-        if(!record.date) 
-        record.errors.add :error, "date cannot be null"
-        return;
-    end
-
         record.status = 'pending' if (!record.status)
-
-        record.errors.add :error, "put the visit date forward or in the same actual date and hour" if (record.date <= Time.now)
+        
+        if(record.date) 
+            record.errors.add :error, "put the visit date forward or in the same actual date and hour" if (record.date <= Time.now)
+        end
 
 
         if(record.checkin_at)

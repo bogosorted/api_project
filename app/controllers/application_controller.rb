@@ -23,6 +23,7 @@ class ApplicationController < ActionController::API
         rescue StandardError => e
           
           render json: {errors: e.message }, status: 404
+          
         end
 
     end

@@ -8,6 +8,7 @@ module UserAuthentication
             def encode(user_id,user_email,key, exp = 24.hours.from_now)
 
                     #cannot have sensitive info
+
                     payload = {}
                     payload[:sub] = user_id
                     payload[:email] = user_email
@@ -39,7 +40,7 @@ module UserAuthentication
                 if(@user && @user.authenticate(login_params[:password]))
 
                     encoded = {auth_token: JsonWebTokens.encode(@user.id,@user.email,JWT_KEY)}
-   
+                    
                 else
 
                     raise "Invalid credentials"
