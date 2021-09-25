@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    
     #softdelet
     acts_as_paranoid
 
@@ -20,7 +21,7 @@ class User < ApplicationRecord
     has_secure_password
 
     validates :password,
-                length: {minimum: 6}
+                length: {minimum: 7}
     
 
 end

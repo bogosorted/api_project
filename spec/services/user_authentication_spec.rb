@@ -4,6 +4,7 @@ include UserAuthentication
 
 #JWT_KEY = Rails.application.credentials.jwt_secret
 RSpec.describe UserAuthentication do
+    
     JWT_KEY = Rails.application.credentials.jwt_secret
 
     describe 'JsonWebTokens' do
@@ -22,7 +23,7 @@ RSpec.describe UserAuthentication do
 
         it 'can login and return a valid token' do
 
-            user = User.create(nick_name: 'fernando', password: '123321', cpf: '08366148017', email: "example@domain.com")
+            user = User.create(nick_name: 'fernando', password: '1234567', cpf: '08366148017', email: "example@domain.com")
             
             login_params = ActionController::Parameters.new({user:{nick_name:user.nick_name,password:user.password}})
            
