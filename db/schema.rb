@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_09_24_235606) do
     t.text "content"
     t.integer "formulary_id", null: false
     t.integer "question_id", null: false
-    t.integer "visit_id", null: false
+    t.integer "visit_id"
     t.datetime "answered_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_09_24_235606) do
 
   create_table "questions", force: :cascade do |t|
     t.string "question_name"
-    t.integer "formulary_id", null: false
+    t.integer "formulary_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "content"

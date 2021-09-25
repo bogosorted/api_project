@@ -18,7 +18,7 @@ RSpec.describe Question, type: :model do
             formulary2 = Formulary.create(form_name: "About the sea")
             question2 = Question.create(question_name: "why is it blue??",formulary_id: formulary2.id)
 
-            expect(question).to be_valid
+            expect(question2).to be_valid
             
         end
     end

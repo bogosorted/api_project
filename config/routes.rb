@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
 
+  resources :questions do
+
+    resources :answers
+
+  end
+
 
   resources :formularies do
 
     resources :questions do
 
       resources :answers
-      
+
     end
-    
   end
 
 
@@ -26,6 +31,8 @@ Rails.application.routes.draw do
     patch '/edit_account' , to: 'users#update'
 
     resources :visits
+
+    
 
   end
 
