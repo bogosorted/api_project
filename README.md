@@ -3,7 +3,7 @@ Rails API-only application that simulates appointment scheduling.
 
 ## Description
 
-The project simulates an API whose main objective is to be a service for creating visits queries. user authentication is done using [bcrypt](https://rubygems.org/gems/bcrypt/versions/3.1.11?locale=pt-BR) and.To maintain the session, [jwt-token](https://rubygems.org/gems/jwt/versions/1.5.4) is used. Unit tests are done using an [rspec](https://rubygems.org/gems/rspec/versions/3.4.0) gem, and the test flow is available in pt-br in this [document](https://docs.google.com/document/d/1e8h8Z8MrcH8e3NhVCJ2gG0jPSRBpRiJiCDQNCz76sLA/edit?usp=sharing).
+The project simulates an API whose main objective is to be a service for creating visits queries. user authentication is done using [bcrypt](https://rubygems.org/gems/bcrypt/versions/3.1.11?locale=pt-BR). To maintain the session, [jwt-token](https://rubygems.org/gems/jwt/versions/1.5.4) is used. Unit tests are done using an [rspec](https://rubygems.org/gems/rspec/versions/3.4.0) gem, and the test flow is available in pt-br in this [document](https://docs.google.com/document/d/1e8h8Z8MrcH8e3NhVCJ2gG0jPSRBpRiJiCDQNCz76sLA/edit?usp=sharing).
 
 ## Getting Started 👌
 ### Dependencies
