@@ -38,4 +38,5 @@ rails db:migrate
 ```
 rails s
 ```
+##### to make requests that require authentication with jwt-token, you must put your token in the http header "Authorization".
 
