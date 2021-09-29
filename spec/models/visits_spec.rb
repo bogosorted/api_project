@@ -28,7 +28,7 @@ RSpec.describe Visit, type: :model do
 
         describe 'checkin_at' do
 
-            it 'must be less than the current date'do
+            it 'must be less than the current date' do
 
                 checkin_at = Time.now + 10.minutes
 
@@ -63,6 +63,34 @@ RSpec.describe Visit, type: :model do
             end
         end
 
-    end
+        describe 'status' do
+            
+            it 'be "pending" without checkin_at and checkout_at' do
+                
+                visit = Visit.create(date:Time.now + 1.minute)
 
+                expect(visit.status).to eq("pending")
+
+            end
+            it 'be "doing" with checkin_at' do
+                
+                checkin_at = Time.now - 20.minutes
+
+                visit = Visit.create(date:Time.now + 1.minute, checkin_at: checkin_at)
+
+                expect(visit.status).to eq("doing")
+
+            end
+            it 'be "done" with both' do
+                
+                checkin_at = Time.now - 20.minutes
+                checkout_at = Time.now - 10.minutes
+                
+                visit = Visit.create(date:Time.now + 1.minute, checkin_at: checkin_at, checkout_at: checkout_at)
+
+                expect(visit.status).to eq("done")
+
+            end
+        end
+    end
 end

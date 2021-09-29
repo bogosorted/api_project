@@ -1,6 +1,6 @@
 
 class UsersController < ApplicationController
-  before_action :authenticate_user, only: [:show,:update,:destroy]  
+  before_action :authenticate_user, only: [:show,:update,:destroy]
 
   # GET /users/profile
   def show

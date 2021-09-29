@@ -1,5 +1,7 @@
 class FormulariesController < ApplicationController
+  before_action :authenticate_user, only: [:create:update,:destroy]  
   before_action :set_formulary, only: [:show, :update, :destroy]
+  
 
   # GET /formularies
   def index
@@ -18,7 +20,7 @@ class FormulariesController < ApplicationController
     @formulary = Formulary.new(formulary_params)
 
     if @formulary.save
-      render json: @formulary, status: :created, location: @formulary
+      render json: @formulary, status: :created
     else
       render json: @formulary.errors, status: :unprocessable_entity
     end
@@ -41,7 +43,7 @@ class FormulariesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_formulary
-      @formulary = Formulary.find(params[:id])
+      @formulary = Formulary.find(params[:index])
     end
 
     # Only allow a list of trusted parameters through.

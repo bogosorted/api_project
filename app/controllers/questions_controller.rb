@@ -1,30 +1,37 @@
 class QuestionsController < ApplicationController
+
+  before_action :authenticate_user, only: [:create,:update,:destroy]
   before_action :set_question, only: [:show, :update, :destroy]
 
-  # GET /questions
   def index
-    @questions = Question.all
+
+    if(params[:formulary_index])
+      @formulary = Formulary.find(params[:formulary_index])
+      @questions = @formulary.questions
+    else
+      @questions = Question.all
+    end
+
 
     render json: @questions
   end
 
-  # GET /questions/1
+
   def show
     render json: @question
   end
 
-  # POST /questions
   def create
     @question = Question.new(question_params)
 
     if @question.save
-      render json: @question, status: :created, location: @question
+      render json: @question, status: :created
     else
       render json: @question.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /questions/1
+
   def update
     if @question.update(question_params)
       render json: @question
@@ -37,15 +44,25 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
   end
+  def set_question_without_form
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = Question.find(params[:id])
+      if(params[:formulary_index])
+        @formulary = Formulary.find(params[:formulary_index])
+        @question = @formulary.questions[params[:question_index]]
+      else
+        @question = Question.find(params[:index])
+      end
+
+      
     end
+    
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:question_name, :formulary)
+      params.require(:question).permit(:question_name,:formulary_id)
     end
 end

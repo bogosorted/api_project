@@ -24,7 +24,7 @@ class VisitsController < ApplicationController
     
     if @visit.save
 
-      render json: @visit, status: :created, location: @visit
+      render json: @visit, status: :created
     else
 
       render json: @visit.errors, status: :unprocessable_entity
@@ -33,7 +33,7 @@ class VisitsController < ApplicationController
     
   end
 
-  # PATCH/PUT /visits/0
+
   def update
    
       if @visit.update(visit_params)
@@ -48,15 +48,19 @@ class VisitsController < ApplicationController
     @visit = @user.visits[params[:id].to_i]
 
   end
-  # DELETE /visits/0
-  def destroy
-    @visit.destroy
+  def destroy  
+
+    if(@visit)
+    @visit.destroy 
+
+    else
+      render json: {error: "visit_id: '#{params[:id]}' does not exist in data base"},status: :bad_request
+    end
+  
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
 
-    # Only allow a list of trusted parameters through.
     def visit_params
       params.require(:visit).permit(:date, :checkin_at, :checkout_at)
     end

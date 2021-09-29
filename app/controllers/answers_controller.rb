@@ -1,9 +1,11 @@
 class AnswersController < ApplicationController
+
+  before_action :authenticate_user, only: [:create,:update,:destroy]
   before_action :set_answer, only: [:show, :update, :destroy]
 
   # GET /answers
   def index
-    @answers = Answer.all
+    @answers = Question.find(params[:question_index]).answers
 
     render json: @answers
   end
@@ -16,9 +18,12 @@ class AnswersController < ApplicationController
   # POST /answers
   def create
     @answer = Answer.new(answer_params)
+    @answer.question_id = params[:question_index]
+
+    @answer.answered_at = Time.now
 
     if @answer.save
-      render json: @answer, status: :created, location: @answer
+      render json: @answer, status: :created
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
