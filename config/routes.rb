@@ -20,10 +20,12 @@ Rails.application.routes.draw do
   end
 
   resources :questions, param: 'index' do
-    resources :answers, only:[:index,:create]
+    resources :answers, only:[:update,:show,:destroy]
+    get '/answers' , to: 'answers#question_answers'
   end
   scope 'questions' do
-    resources :answers, only:[:show,:update,:destroy]
+  
+    resources :answers, only:[:index,:create]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -6,10 +6,19 @@ class QuestionsController < ApplicationController
   def index
 
     if(params[:formulary_index])
+
       @formulary = Formulary.find(params[:formulary_index])
-      @questions = @formulary.questions
+
+      if(@formulary)
+
+        @questions = @formulary.questions
+
+       end
+
     else
+
       @questions = Question.all
+
     end
 
 
@@ -57,7 +66,6 @@ class QuestionsController < ApplicationController
         @question = Question.find(params[:index])
       end
 
-      
     end
     
 

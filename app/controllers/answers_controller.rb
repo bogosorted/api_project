@@ -5,10 +5,11 @@ class AnswersController < ApplicationController
 
   # GET /answers
   def index
-    @answers = Question.find(params[:question_index]).answers
+    @answers = Question.all
 
     render json: @answers
   end
+  
 
   # GET /answers/1
   def show
@@ -17,9 +18,8 @@ class AnswersController < ApplicationController
 
   # POST /answers
   def create
-    @answer = Answer.new(answer_params)
-    @answer.question_id = params[:question_index]
 
+    @answer = Answer.create(answer_params)
     @answer.answered_at = Time.now
 
     if @answer.save
@@ -43,10 +43,19 @@ class AnswersController < ApplicationController
     @answer.destroy
   end
 
+  def question_answers
+
+      @question = Question.find(params[:question_index])
+      @answers = @question.answers
+
+      render json: @answers
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
-      @answer = Answer.find(params[:id])
+      @question = Question.find[params[:question_index]]
+      @answer = @question.answers.where(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

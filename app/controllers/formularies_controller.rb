@@ -1,5 +1,5 @@
 class FormulariesController < ApplicationController
-  before_action :authenticate_user, only: [:create:update,:destroy]  
+  before_action :authenticate_user, only: [:create,:update,:destroy]  
   before_action :set_formulary, only: [:show, :update, :destroy]
   
 

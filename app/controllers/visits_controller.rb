@@ -13,7 +13,9 @@ class VisitsController < ApplicationController
 
   # GET /visits/0
   def show
+
     render json: @visit
+
   end
 
   # POST /visits
@@ -35,12 +37,25 @@ class VisitsController < ApplicationController
 
 
   def update
-   
+
+    if(@visit)
+
       if @visit.update(visit_params)
+
         render json: @visit
+
       else
+
         render json: @visit.errors, status: :unprocessable_entity
+
       end
+
+    else
+
+      render json: {error:"Vist not found with id #{params[:id]}"}, status: 404
+
+    end
+
   end
   
   def set_visit
@@ -51,10 +66,11 @@ class VisitsController < ApplicationController
   def destroy  
 
     if(@visit)
-    @visit.destroy 
+
+      @visit.destroy 
 
     else
-      render json: {error: "visit_id: '#{params[:id]}' does not exist in data base"},status: :bad_request
+      render json: {error: "visit_id: '#{params[:id]}' does not exist in data base"}, status: 404
     end
   
   end
